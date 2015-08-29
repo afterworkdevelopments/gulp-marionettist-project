@@ -1,6 +1,6 @@
 {
   "name": "gulp-marionetist-project",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "gulp marionetist project bootstrapper",
   "main": "lib/gulp-marionetist-project.js",
   "scripts": {

@@ -1,8 +1,8 @@
 # gulp-marionetist-project
 
-## Usage
+It's a gulp plugin that generates a project folder structure for [marionetist](https://github.com/afterworkdevelopments/marionetist) projects, mainly focused in hybrid mobile apps with cordova, but  it can be used for normal static SPA.
 
-#### Install
+### Install
 
 ```
   npm install gulp-marionetist-project --save
@@ -22,23 +22,46 @@ gulp.task 'gulp_marionetist_project', ()->
 gulp.task "default", ["gulp_marionetist_project"]
 ```
 
-Note: make sure to install `npm install coffee-script --save` so you can use the Gulpfile.coffee
+**Note:** make sure to install `npm install coffee-script --save` so you can use the Gulpfile.coffee
 
+## Usage
+
+Once you run `gulp` command it will create a folder structure, a template for your app, run a server (port: 8000), watch and compile SASS, HAML, Coffeescript, HAML-coffee and outputs the result in the `www` folder, ready to use with cordova.
+
+**Note:**  if you want to minify the output, just pass the production environment to the gulp task `NODE_ENV=production gulp`
+
+### Folder structure
+
+```
+src/
+  fonts/ # files in here it will be copied to www/fonts
+  haml/ # files (.haml) in here it will be compiled to HTML and copied to www/
+    index.haml # template for cordova application
+  images/ # files in here it will be copied to www/images
+  multimedia/ # files in here it will be copied to www/multimedia
+  javascript
+    {packageName}/
+      locales/ # a folder to store your i18next locales
+        config.coffee # module to include the translations
+        en.coffee # English translations
+        es.coffee # Spanish translations
+      application.coffe # browserify entry point for your application
+    application.coffee # application main file to initialize your app
+  stylesheets/
+    application.sass # entry point for sass file import, etc
+www/ # output directory for compiled files
+
+```
 
 
 ## Project dependencies
 
 ```
-  npm install coffee-script --save
-  npm install gulp --save
-  npm install gulp-util --save
-  npm install jquery --save
-  npm install i18next-client --save
-  npm install underscore --save
-  npm install backbone --save
-  npm install backbone-associations --save
-  npm install backbone.marionette --save
-  npm install marionetist --save
+npm install coffee-script --save
+npm install gulp --save
+npm install gulp-util --save
+npm install jquery --save
+npm install marionetist --save
 ```
 
 ## Options
@@ -68,13 +91,13 @@ Plugin [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) options
 
 `opts.pathmodify.dir`
 
-Type: `String` Default: `/#{process.cwd()}/src/javascripts/#{pkgName}`
+Type: `String` Default: `/#{process.cwd()}/src/javascripts/#{packageName}`
 
 Source Directory
 
 `opts.pathmodify.name`
 
-Type: `String` Default: `#{pkgName}`
+Type: `String` Default: `#{packageName}`
 
 Name be used while requiring a file, the default value its from the name property of your package.json
 
@@ -221,7 +244,7 @@ Type: `String` Default: `templates.js`
 
 `opts.hamlc.options`
 
-Type: `Object` Default: {compile: {includePath: true, pathRelativeTo: "./src/javascripts/#{pkgName}"} }
+Type: `Object` Default: {compile: {includePath: true, pathRelativeTo: "./src/javascripts/#{packageName}"} }
 
 Plugin [gulp-haml-coffee-compile](https://github.com/emilioforrer/gulp-haml-coffee-compile) options
 

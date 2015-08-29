@@ -1,8 +1,4 @@
 window.$ = window.jQuery = require('jquery')
-window._ = require("underscore")
-Backbone = require("backbone")
-BackboneAssociations = require("backbone-associations")
-Backbone.$ = window.$
 Marionetist = require("marionetist")
 
 App = new Marionetist.Application()

@@ -27,6 +27,7 @@ buffer      = require('vinyl-buffer')
 
 module.exports = (options = {})->
   env = process.env.NODE_ENV || "development"
+  console.log "ENVIRONMENT: #{env}"
   root = path.resolve(__dirname, "../")
   settings = merge(config, options)
   pkgName = "demo"
@@ -114,7 +115,6 @@ module.exports = (options = {})->
 
     sass: ()->
       console.log "Running sass task"
-      console.log env
       sass(settings.sass.src, settings.sass.options).on("error", gutil.log)
         .pipe(plumber())
         .pipe(cssImport())
