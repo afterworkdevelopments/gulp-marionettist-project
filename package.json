@@ -1,31 +1,31 @@
 {
-  "name": "gulp-marionetist-project",
+  "name": "gulp-marionettist-project",
   "version": "0.2.0",
-  "description": "gulp marionetist project bootstrapper",
-  "main": "lib/gulp-marionetist-project.js",
+  "description": "gulp marionettist project bootstrapper",
+  "main": "lib/gulp-marionettist-project.js",
   "scripts": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/afterworkdevelopments/gulp-marionetist-project.git"
+    "url": "git+https://github.com/afterworkdevelopments/gulp-marionettist-project.git"
   },
   "keywords": [
     "Marionette",
     "Framework",
     "Backbone",
-    "Marionetist",
+    "Marionettist",
     "Gulp",
     "Project"
   ],
   "author": "Emilio Forrer <dev.emilio.forrer@gmail.com> (https://github.com/emilioforrer)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/afterworkdevelopments/gulp-marionetist-project/issues"
+    "url": "https://github.com/afterworkdevelopments/gulp-marionettist-project/issues"
   },
-  "homepage": "https://github.com/afterworkdevelopments/gulp-marionetist-project#readme",
+  "homepage": "https://github.com/afterworkdevelopments/gulp-marionettist-project#readme",
   "dependencies": {
-    "marionetist": "^0.2.0",
+    "marionettist": "^0.2.0",
     "browser-sync": "^2.7.13",
     "browserify": "^10.2.4",
     "coffee-script": "~1.9.3",

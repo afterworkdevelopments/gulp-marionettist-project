@@ -1,11 +1,11 @@
-# gulp-marionetist-project
+# gulp-marionettist-project
 
-It's a gulp plugin that generates a project folder structure for [marionetist](https://github.com/afterworkdevelopments/marionetist) projects, mainly focused in hybrid mobile apps with cordova, but  it can be used for normal static SPA.
+It's a gulp plugin that generates a project folder structure for [marionettist](https://github.com/afterworkdevelopments/marionettist) projects, mainly focused in hybrid mobile apps with cordova, but  it can be used for normal static SPA.
 
 ### Install
 
 ```
-  npm install gulp-marionetist-project --save
+  npm install gulp-marionettist-project --save
 ```
 
 ## Example: Gulpfile.coffee
@@ -13,13 +13,13 @@ It's a gulp plugin that generates a project folder structure for [marionetist](h
 ```coffeescript
 gulp                   = require("gulp")
 gutil                  = require("gulp-util")
-gulpMarionetistProject = require('gulp-marionetist-project')
+gulpMarionettistProject = require('gulp-marionettist-project')
 
-gulp.task 'gulp_marionetist_project', ()->
-  gulpMarionetistProject()
+gulp.task 'gulp_marionettist_project', ()->
+  gulpMarionettistProject()
 
 
-gulp.task "default", ["gulp_marionetist_project"]
+gulp.task "default", ["gulp_marionettist_project"]
 ```
 
 **Note:** make sure to install `npm install coffee-script --save` so you can use the Gulpfile.coffee
@@ -61,7 +61,7 @@ npm install coffee-script --save
 npm install gulp --save
 npm install gulp-util --save
 npm install jquery --save
-npm install marionetist --save
+npm install marionettist --save
 ```
 
 ## Options

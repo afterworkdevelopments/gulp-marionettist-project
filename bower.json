@@ -1,12 +1,12 @@
 {
-  "name": "gulp-marionetist-project",
+  "name": "gulp-marionettist-project",
   "version": "0.2.0",
-  "homepage": "https://github.com/afterworkdevelopments/gulp-marionetist-project",
+  "homepage": "https://github.com/afterworkdevelopments/gulp-marionettist-project",
   "authors": [
     "Emilio Forrer <dev.emilio.forrer@gmail.com>"
   ],
-  "description": "gulp marionetist project bootstrapper",
-  "main": "lib/gulp-marionetist-project.js",
+  "description": "gulp marionettist project bootstrapper",
+  "main": "lib/gulp-marionettist-project.js",
   "moduleType": [
     "amd",
     "globals",
@@ -16,7 +16,7 @@
     "Marionette",
     "Framework",
     "Backbone",
-    "Marionetist",
+    "Marionettist",
     "Gulp",
     "Project"
   ],

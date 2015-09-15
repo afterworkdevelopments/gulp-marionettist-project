@@ -1,7 +1,7 @@
 window.$ = window.jQuery = require('jquery')
-Marionetist = require("marionetist")
+Marionettist = require("marionettist")
 
-App = new Marionetist.Application()
+App = new Marionettist.Application()
 
 window.App = App
 
