@@ -1,6 +1,6 @@
 {
   "name": "gulp-marionettist-project",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "gulp marionettist project bootstrapper",
   "main": "lib/gulp-marionettist-project.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/afterworkdevelopments/gulp-marionettist-project#readme",
   "dependencies": {
-    "marionettist": "^0.2.0",
+    "marionettist": "^1.0.1",
     "browser-sync": "^2.7.13",
     "browserify": "^10.2.4",
     "coffee-script": "~1.9.3",
