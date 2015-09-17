@@ -1,5 +1,9 @@
 # CHANGE LOG
 
+## 0.2.2
+
+* Renamed package
+
 ## 0.2.1
 
 * Updated dependencies

@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/afterworkdevelopments/gulp-marionettist-project#readme",
   "dependencies": {
-    "marionettist": "^1.0.1",
+    "marionettist": "^1.0.2",
     "browser-sync": "^2.7.13",
     "browserify": "^10.2.4",
     "coffee-script": "~1.9.3",
