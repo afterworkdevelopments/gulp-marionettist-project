@@ -70,7 +70,7 @@ npm install marionettist --save
 
 `opts.sass.src`
 
-Type: `String` Default: `./src/stylesheets`
+Type: `String` Default: `./src/stylesheets/application.sass`
 
 Source Directory
 
@@ -82,9 +82,9 @@ Destination folder
 
 `opts.sass.options`
 
-Type: `Object` Default: {noCache: true, compass: true, bundleExec: false}
+Type: `Object` Default: {}
 
-Plugin [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) options
+Plugin [gulp-sass](https://github.com/dlmanning/gulp-sass) options
 
 
 ### pathmodify
@@ -169,7 +169,7 @@ Just copies the files of src folder to dest folder
 
 `opts.fonts.src`
 
-Type: `String` Default: `./src/fonts`
+Type: `String` Default: `./src/fonts/**/*`
 
 Source Directory
 
@@ -181,7 +181,7 @@ Destination folder
 
 `opts.fonts.options`
 
-Type: `Object` Default: {}
+Type: `Object` Default: {fontAwesome: true,formats: "eot,svg,ttf,woff,woff2"}
 
 Just copies the files of src folder to dest folder
 

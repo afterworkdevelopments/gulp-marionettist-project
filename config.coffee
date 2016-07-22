@@ -4,7 +4,7 @@ www               = "www"
 paths =
   www: www
   sass:
-    src: "./#{src}/stylesheets"
+    src: "./#{src}/stylesheets/application.sass"
     dest: "./#{www}/stylesheets"
   coffee:
     src: "./#{src}/javascripts"
@@ -22,7 +22,7 @@ paths =
     src: "./#{src}/fonts/**/*"
     dest: "./#{www}/fonts"
   hamlc:
-    src: "./#{src}/javascripts/**/**/**/**/*.hamlc"
+    src: "./#{src}/javascripts/**/**/**/**/**/*.hamlc"
     dest: "./#{www}/javascripts"
 
 pkgName = "demo"
@@ -38,10 +38,7 @@ module.exports =
   sass:
     src:  paths.sass.src
     dest: paths.sass.dest
-    options:
-      noCache: true
-      compass: true
-      bundleExec: false
+    options: {}
 
   pathmodify:
     name: "#{pkgName}"
@@ -69,6 +66,9 @@ module.exports =
   fonts:
     src:  paths.fonts.src
     dest: paths.fonts.dest
+    options:
+      fontAwesome: true
+      formats: "eot,svg,ttf,woff,woff2"
 
   coffee:
     src:  paths.coffee.src
@@ -95,21 +95,7 @@ module.exports =
         includePath: true
         pathRelativeTo: "./src/javascripts/#{pkgName}"
 
-  server:
-    options:
-      livereload: true,
-      directoryListing:
-        enable: false,
-        path: www
-      open: false,
-      port: 8000
 
-  connect:
-    options:
-      root: www
-      livereload: true
-      port: 8000
-      open: false
 
   browsersync:
     options:
@@ -117,9 +103,3 @@ module.exports =
       server:
         baseDir: [www]
       port: 8000
-      # files: [
-      #   "#{paths.sass.dest}/*.css",
-      #   "#{paths.coffee.dest}/*.js",
-      #   "#{paths.images.dest}**",
-      #   "#{paths.fonts.dest}*"
-      # ]
