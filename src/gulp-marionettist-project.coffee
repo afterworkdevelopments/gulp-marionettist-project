@@ -1,35 +1,37 @@
 gulp        = require("gulp")
 changed     = require("gulp-changed")
-config      = require("../config")
-server      = require("gulp-server-livereload")
-browserSync = require("browser-sync")
+uglify      = require('gulp-uglify')
+gulpIf      = require('gulp-if')
 plumber     = require("gulp-plumber")
-sass        = require("gulp-ruby-sass")
+sass        = require("gulp-sass")
+gutil       = require("gulp-util")
+haml        = require("gulp-haml")
+hamlc       = require("gulp-haml-coffee-compile")
+concat      = require('gulp-concat')
+watch       = require('gulp-watch')
+
+browserSync = require("browser-sync")
+
 browserify  = require("browserify")
 watchify    = require("watchify")
 coffeeify   = require("coffeeify")
 debowerify  = require("debowerify")
 source      = require("vinyl-source-stream")
-gutil       = require("gulp-util")
-haml        = require("gulp-haml")
-cssImport   = require("gulp-cssimport")
-hamlc       = require("gulp-haml-coffee-compile")
-concat      = require('gulp-concat')
 pathmodify  = require("pathmodify")
-watch       = require('gulp-watch')
+buffer      = require('vinyl-buffer')
+
+
 merge       = require("merge")
 fs          = require("fs-extra")
 path        = require("path")
-minifyCss   = require('gulp-minify-css')
-uglify      = require('gulp-uglify')
-gulpIf      = require('gulp-if')
-buffer      = require('vinyl-buffer')
 
-module.exports = (options = {})->
+config      = require("../config")
+
+module.exports = (options = {}, autostart = true)->
   env = process.env.NODE_ENV || "development"
   console.log "ENVIRONMENT: #{env}"
   root = path.resolve(__dirname, "../")
-  settings = merge(config, options)
+  settings = merge.recursive(config, options)
   pkgName = "demo"
   try
     pkg = require("/#{process.cwd()}/package.json")
@@ -37,15 +39,14 @@ module.exports = (options = {})->
       pkgName = pkg.name
   catch error
     console.log "No package.json"
-
-  replaceGlobPatterns = (str)->
-    str.toString().replace("/**", "").replace("/*", "").replace( /\.[^/.]+$/, '')
-  sassPath   = replaceGlobPatterns(settings.sass.src)
-  imagePath  = replaceGlobPatterns(settings.images.src)
-  audiosPath = replaceGlobPatterns(settings.multimedia.src)
-  fontsPath  = replaceGlobPatterns(settings.fonts.src)
-  hamlPath   = replaceGlobPatterns(settings.haml.src)
-  coffeePath = replaceGlobPatterns(settings.coffee.src)
+  @replaceGlobPatterns = (str)->
+    str.toString().split("/**").join("").split("/*").join("").split("*").join("").replace( /\.[^/.]+$/, '')
+  sassPath   = @replaceGlobPatterns(settings.sass.src)
+  imagePath  = @replaceGlobPatterns(settings.images.src)
+  audiosPath = @replaceGlobPatterns(settings.multimedia.src)
+  fontsPath  = @replaceGlobPatterns(settings.fonts.src)
+  hamlPath   = @replaceGlobPatterns(settings.haml.src)
+  coffeePath = @replaceGlobPatterns(settings.coffee.src)
   pkgNamePath = "./src/javascripts/#{pkgName}"
   @tasks =
     setup: ()->
@@ -93,10 +94,11 @@ module.exports = (options = {})->
 
     fonts: ()->
       console.log "Running fonts task"
-      gulp.src('node_modules/font-awesome/fonts/fontawesome-webfont.*')
-        .pipe(gulp.dest(settings.paths.fonts.src))
-      gulp.src(settings.paths.fonts.src)
-        .pipe(gulp.dest(settings.paths.fonts.dest))
+      if settings.fonts.options.fontAwesome is true
+        gulp.src('node_modules/font-awesome/fonts/fontawesome-webfont.*')
+          .pipe(gulp.dest(settings.paths.fonts.dest))
+      for format in settings.fonts.options.formats.split(",")
+        gulp.src(settings.paths.fonts.src+".#{format.trim()}").pipe(gulp.dest(settings.paths.fonts.dest))
 
 
     multimedia: ()->
@@ -115,17 +117,16 @@ module.exports = (options = {})->
 
     sass: ()->
       console.log "Running sass task"
-      sass(settings.sass.src, settings.sass.options).on("error", gutil.log)
-        .pipe(plumber())
-        .pipe(cssImport())
-        .pipe(gulpIf((env == "production"),minifyCss(settings.minifyCss.options)))
+      settings.sass.options.outputStyle = 'compressed' if env == "production"
+      gulp.src(settings.sass.src)
+        .pipe(sass(settings.sass.options).on('error', sass.logError))
         .pipe(gulp.dest(settings.sass.dest))
         .pipe(browserSync.reload({stream: true}))
 
     browserify: ()->
       console.log "Running browserify task"
       b = watchify(browserify(settings.browserify.options)).on("error", gutil.log)
-      b.plugin(pathmodify(), {mods: [
+      b.plugin(pathmodify, {mods: [
         pathmodify.mod.dir(settings.pathmodify.name, settings.pathmodify.dir)
       ]})
       b.transform(coffeeify)
@@ -178,13 +179,17 @@ module.exports = (options = {})->
       gulp.watch(settings.hamlc.src, @hamlc )
       gulp.watch(settings.paths.haml.src, @haml)
 
-  @tasks.setup()
-  @tasks.multimedia()
-  @tasks.images()
-  @tasks.fonts()
-  @tasks.sass()
-  @tasks.browserify()
-  @tasks.browsersync()
-  @tasks.hamlc()
-  @tasks.haml()
-  @tasks.watchfiles()
+  if autostart
+    @tasks.setup()
+    @tasks.multimedia()
+    @tasks.images()
+    @tasks.fonts()
+    @tasks.sass()
+    @tasks.browserify()
+    @tasks.browsersync()
+    @tasks.hamlc()
+    @tasks.haml()
+    @tasks.watchfiles()
+
+  return @
+# npm install browser-sync browserify coffee-script coffeeify debowerify fs-extra gulp gulp-changed gulp-coffee gulp-concat gulp-haml gulp-haml-coffee-compile gulp-if gulp-plumber gulp-sass gulp-uglify gulp-util gulp-watch marionettist merge pathmodify source-map vinyl-buffer vinyl-source-stream watchify --save
