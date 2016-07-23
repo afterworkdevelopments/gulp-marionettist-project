@@ -4,6 +4,8 @@ uglify      = require('gulp-uglify')
 gulpIf      = require('gulp-if')
 plumber     = require("gulp-plumber")
 sass        = require("gulp-sass")
+cssImport   = require("gulp-cssimport")
+sourcemaps  = require('gulp-sourcemaps')
 gutil       = require("gulp-util")
 haml        = require("gulp-haml")
 hamlc       = require("gulp-haml-coffee-compile")
@@ -119,7 +121,10 @@ module.exports = (options = {}, autostart = true)->
       console.log "Running sass task"
       settings.sass.options.outputStyle = 'compressed' if env == "production"
       gulp.src(settings.sass.src)
+        .pipe(sourcemaps.init())
         .pipe(sass(settings.sass.options).on('error', sass.logError))
+        .pipe(cssImport())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(settings.sass.dest))
         .pipe(browserSync.reload({stream: true}))
 
