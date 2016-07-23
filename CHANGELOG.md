@@ -1,5 +1,9 @@
 # CHANGE LOG
 
+## 1.1.0
+
+* added gulp-cssimport
+
 ## 1.0.0
 
 * Updated dependencies
